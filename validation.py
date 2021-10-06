@@ -257,7 +257,7 @@ if __name__ == "__main__":
     test_scheme_path = 'datasets/iris.names'
 
     # just choose one mode to experiment by removing one line comment and running
-    cross_validate_m1_without_prune(test_data_path, test_scheme_path)
-    # cross_validate_m1_with_prune(test_data_path, test_scheme_path)
+    #cross_validate_m1_without_prune(test_data_path, test_scheme_path)
+    cross_validate_m1_with_prune(test_data_path, test_scheme_path)
     # cross_validate_m2_without_prune(test_data_path, test_scheme_path)
     # cross_validate_m1_with_prune(test_data_path, test_scheme_path)

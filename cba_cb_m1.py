@@ -32,10 +32,10 @@ class Classifier:
     This class is our classifier. The rule_list and default_class are useful for outer code.
     """
     def __init__(self):
-        self.rule_list = list()
-        self.default_class = None
+        self.rule_list = list() #equivalent to C in the pseudocode
+        self.default_class = None #equivalent to the default class in the pseudocode
         self._error_list = list()
-        self._default_class_list = list()
+        self._default_class_list = list() #maintains a list of default classes, that gets appended to after each rule r is added to C
 
     # insert a rule into rule_list, then choose a default class, and calculate the errors (see line 8, 10 & 11)
     def insert(self, rule, dataset):
@@ -45,7 +45,8 @@ class Classifier:
 
     # select the majority class in the remaining data
     def _select_default_class(self, dataset):
-        class_column = [x[-1] for x in dataset]
+        #sets the majority class from the remaining data as the default class
+        class_column = [x[-1] for x in dataset] 
         class_label = set(class_column)
         max = 0
         current_default_class = None
@@ -108,16 +109,29 @@ def sort(car):
                 if len(a.cond_set) < len(b.cond_set):   # 3. both confidence & support are the same, ri earlier than rj
                     return -1
                 elif len(a.cond_set) == len(b.cond_set):
-                    return 0
+                    #how to figure out precedence if the two cond_sets are of the same length!!!!!!!!!!!!!!
+                    for rule in car.rule_list:
+                        if rule==a:
+                            return -1
+                        if rule==b:
+                            return 1
+
                 else:
                     return 1
             else:
                 return -1
         else:
             return -1
-
+    
+    # for rule in cars.rule_list:
+        
+    #     print(rule.cond_set,rule.class_label, rule.support,rule.confidence)
     rule_list = list(car.rules)
     rule_list.sort(key=cmp_to_key(cmp_method))
+    # print("After sorting")
+    # for rule in rule_list:
+        
+    #     print(rule.cond_set,rule.class_label, rule.support,rule.confidence)
     return rule_list
 
 
@@ -134,6 +148,7 @@ def classifier_builder_m1(cars, dataset):
                 temp.append(i)
                 if is_satisfy_value:
                     mark = True
+        
         if mark:
             temp_dataset = list(dataset)
             for index in temp:
@@ -142,21 +157,23 @@ def classifier_builder_m1(cars, dataset):
                 temp_dataset.remove([])
             dataset = temp_dataset
             classifier.insert(rule, dataset)
+        
     classifier.discard()
     return classifier
 
 
 # just for test
 if __name__ == '__main__':
+    #dataset given should be in the form of a 2D list, where every list element is one sample input
     dataset = [[1, 1, 1], [1, 1, 1], [1, 2, 1], [2, 2, 1], [2, 2, 1],
                [2, 2, 0], [2, 3, 0], [2, 3, 0], [1, 1, 0], [3, 2, 0]]
     minsup = 0.15
     minconf = 0.6
+    #cars is a Car Object, which has a set of rules, and a set of pruned_rules. Items in this set are RuleItem objects
     cars = cba_rg.rule_generator(dataset, minsup, minconf)
     classifier = classifier_builder_m1(cars, dataset)
     classifier.print()
 
-    print()
     dataset = [[1, 1, 1], [1, 1, 1], [1, 2, 1], [2, 2, 1], [2, 2, 1],
                [2, 2, 0], [2, 3, 0], [2, 3, 0], [1, 1, 0], [3, 2, 0]]
     cars.prune_rules(dataset)

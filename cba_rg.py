@@ -51,10 +51,16 @@ class Car:
     def __init__(self):
         self.rules = set()
         self.pruned_rules = set()
+        self.rule_list = list()
 
     # print out all rules
     def print_rule(self):
         for item in self.rules:
+            item.print_rule()
+    
+    # print out all rules in list
+    def print_rule_list(self):
+        for item in self.rule_list:
             item.print_rule()
 
     # print out all pruned rules
@@ -70,11 +76,14 @@ class Car:
             for item in self.rules:
                 if item.cond_set == rule_item.cond_set and item.confidence < rule_item.confidence:
                     self.rules.remove(item)
+                    self.rule_list=[value for value in self.rule_list if value != item]
                     self.rules.add(rule_item)
+                    self.rule_list.append(rule_item)
                     return
                 elif item.cond_set == rule_item.cond_set and item.confidence >= rule_item.confidence:
                     return
             self.rules.add(rule_item)
+            self.rule_list.append(rule_item)
 
     # convert frequent ruleitems into car
     def gen_rules(self, frequent_ruleitems, minsup, minconf):
@@ -189,6 +198,7 @@ def rule_generator(dataset, minsup, minconf):
     class_label = set([x[-1] for x in dataset])
     for column in range(0, len(dataset[0])-1):
         distinct_value = set([x[column] for x in dataset])
+        # distinct_value = [x[column] for x in dataset]
         for value in distinct_value:
             cond_set = {column: value}
             for classes in class_label:
@@ -218,15 +228,25 @@ def rule_generator(dataset, minsup, minconf):
 
 # just for test
 if __name__ == "__main__":
-    dataset = [[1, 1, 1], [1, 1, 1], [1, 2, 1], [2, 2, 1], [2, 2, 1],
+    # dataset = [[1, 1, 1], [1, 1, 1], [1, 2, 1], [2, 2, 1], [2, 2, 1],
+    #            [2, 2, 0], [2, 3, 0], [2, 3, 0], [1, 1, 0], [3, 2, 0]]
+    # dataset = [[1, 1, 1], [1, 1, 1], [1, 2, 1], [1, 2, 1], [1, 2, 1]]
+    # dataset = [[4, 1, 2, 1], [3, 1, 1, 1], [3, 1, 1, 0], [1, 3, 3, 1], [4, 1, 1, 0], [2, 3, 3, 1], 
+# [2, 1, 1, 1], [2, 1, 1, 0], [1, 2, 2, 0], [4, 2, 3, 1]]
+    dataset=[[1, 1, 1], [1, 1, 1], [1, 2, 1], [2, 2, 1], [2, 2, 1],
                [2, 2, 0], [2, 3, 0], [2, 3, 0], [1, 1, 0], [3, 2, 0]]
-    minsup = 0.15
-    minconf = 0.6
+    minsup = 0.01
+    minconf = 0.5
     cars = rule_generator(dataset, minsup, minconf)
 
-    print("CARs:")
+    print("CARs:(set)")
     cars.print_rule()
-
+    print("len:")
+    print(len(cars.rules))
+    print("Rule_list")
+    cars.print_rule_list()
+    print("len:")
+    print(len(cars.rule_list))
     print("prCARs:")
     cars.prune_rules(dataset)
     cars.print_pruned_rule()
