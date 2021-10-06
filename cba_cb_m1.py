@@ -100,6 +100,7 @@ class Classifier:
 # sort the set of generated rules car according to the relation ">", return the sorted rule list
 def sort(car):
     def cmp_method(a, b):
+        # print("the value of b confidence is:",b.confidence)
         if a.confidence < b.confidence:     # 1. the confidence of ri > rj
             return 1
         elif a.confidence == b.confidence:
