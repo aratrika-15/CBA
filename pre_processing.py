@@ -153,16 +153,16 @@ def pre_process(data, attribute, value_type):
 # just for test
 if __name__ == '__main__':
     test_data = [
-        ['red', 25.6, 56, 1],
-        ['green', 33.3, 1, 1],
-        ['green', 2.5, 23, 0],
-        ['blue', 67.2, 111, 1],
-        ['red', 29.0, 34, 0],
-        ['yellow', 99.5, 78, 1],
-        ['yellow', 10.2, 23, 1],
-        ['yellow', 9.9, 30, 0],
-        ['blue', 67.0, 47, 0],
-        ['red', 41.8, 99, 1]
+        ['red', 25.6, 56, 'a'],
+        ['green', 33.3, 1, 'a'],
+        ['green', 2.5, 23, 'b'],
+        ['blue', 67.2, 111, 'a'],
+        ['red', 29.0, 34, 'b'],
+        ['yellow', 99.5, 78, 'a'],
+        ['yellow', 10.2, 23, 'a'],
+        ['yellow', 9.9, 30, 'b'],
+        ['blue', 67.0, 47, 'b'],
+        ['red', 41.8, 99, 'a']
     ]
     test_attribute = ['color', 'average', 'age', 'class']
     test_value_type = ['categorical', 'numerical', 'numerical', 'label']
