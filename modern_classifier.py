@@ -4,6 +4,7 @@ from sklearn.model_selection import cross_val_score
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.svm import SVC
+from sklearn.naive_bayes import GaussianNB
 import new_preprocessing
 from split_dataframe import define_splitting
 import time
@@ -73,3 +74,7 @@ if __name__ == '__main__':
     model=SVC()
     print("Results of Support Vector Classifier:")
     evaluate_model(dataframe,model)
+    model=GaussianNB()
+    print("Results of Naive Bayes Classifier:")
+    evaluate_model(dataframe,model)
+
