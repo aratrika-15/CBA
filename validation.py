@@ -17,6 +17,32 @@ from cba_cb_m2 import classifier_builder_m2
 import time
 import random
 
+def get_accuracy(classifier,dataset):
+    size = len(dataset)
+    # for case in dataset:
+    #     is_satisfy_value = False
+    #     for rule in classifier.rule_list:
+    #         is_satisfy_value = is_satisfy(case, rule)
+    #         if is_satisfy_value == True:
+    #             break
+    #     if is_satisfy_value == False:
+    #         if classifier.default_class != case[-1]:
+    #             error_number += 1
+    # return error_number / size
+    count = 0
+    for case in dataset:
+        is_satisfy_value=False
+        for rule in classifier.rule_list:
+            is_satisfy_value=is_satisfy(case,rule)
+            if is_satisfy_value==True:
+                count = count+1
+                break
+        if is_satisfy_value==None:
+            if(classifier.default_class==case[-1]):
+                count = count+1
+    print("value of count:",count)
+    return count/size
+
 
 # calculate the error rate of the classifier on the dataset
 def get_error_rate(classifier, dataset):
@@ -52,7 +78,6 @@ def get_error_rate(classifier, dataset):
     return error_number/size
 
 
-
 # 10-fold cross-validations on CBA (M1) without pruning
 def cross_validate_m1_without_prune(data_path, scheme_path, minsup=0.01, minconf=0.5):
     data, attributes, value_type = read(data_path, scheme_path)
@@ -68,6 +93,7 @@ def cross_validate_m1_without_prune(data_path, scheme_path, minsup=0.01, minconf
     total_car_number = 0
     total_classifier_rule_num = 0
     error_total_rate = 0
+    total_accuracy = 0
 
     for k in range(len(split_point)-1):
         print("\nRound %d:" % k)
@@ -106,6 +132,9 @@ def cross_validate_m1_without_prune(data_path, scheme_path, minsup=0.01, minconf
         error_rate = get_error_rate(classifier_m1, test_dataset)
         error_total_rate += error_rate
 
+        predictor_accuracy = get_accuracy(classifier_m1,dataset)
+        total_accuracy += predictor_accuracy
+
         total_car_number += len(cars.rules)
         total_classifier_rule_num += len(classifier_m1.rule_list)
 
@@ -114,8 +143,9 @@ def cross_validate_m1_without_prune(data_path, scheme_path, minsup=0.01, minconf
         print("CBA-RG's run time without pruning: %.2lf s" % cba_rg_runtime)
         print("CBA-CB M1's run time without pruning: %.2lf s" % cba_cb_runtime)
         print("No. of rules in classifier of CBA-CB M1 without pruning: %d" % len(classifier_m1.rule_list))
-
+            
     print("\nAverage CBA's error rate without pruning: %.1lf%%" % (error_total_rate / 10 * 100))
+    print("Average CBA's accuracy without pruning: %.1lf%%" % (total_accuracy/ 10 * 100))
     print("Average No. of CARs without pruning: %d" % int(total_car_number / 10))
     print("Average CBA-RG's run time without pruning: %.2lf s" % (cba_rg_total_runtime / 10))
     print("Average CBA-CB M1's run time without pruning: %.2lf s" % (cba_cb_total_runtime / 10))
@@ -137,6 +167,7 @@ def cross_validate_m1_with_prune(data_path, scheme_path, minsup=0.01, minconf=0.
     total_car_number = 0
     total_classifier_rule_num = 0
     error_total_rate = 0
+    total_accuracy = 0
 
     for k in range(len(split_point)-1):
         print("\nRound %d:" % k)
@@ -177,6 +208,9 @@ def cross_validate_m1_with_prune(data_path, scheme_path, minsup=0.01, minconf=0.
         error_rate = get_error_rate(classifier_m1, test_dataset)
         error_total_rate += error_rate
 
+        predictor_accuracy = get_accuracy(classifier_m1,dataset)
+        total_accuracy += predictor_accuracy
+
         total_car_number += len(cars.rules)
         total_classifier_rule_num += len(classifier_m1.rule_list)
 
@@ -187,6 +221,7 @@ def cross_validate_m1_with_prune(data_path, scheme_path, minsup=0.01, minconf=0.
         print("No. of rules in classifier of CBA-CB M1 with pruning: %d" % len(classifier_m1.rule_list))
 
     print("\nAverage CBA's error rate with pruning: %.1lf%%" % (error_total_rate / 10 * 100))
+    print("Average CBA's accuracy with pruning: %.1lf%%" % (total_accuracy/ 10 * 100))
     print("Average No. of CARs with pruning: %d" % int(total_car_number / 10))
     print("Average CBA-RG's run time with pruning: %.2lf s" % (cba_rg_total_runtime / 10))
     print("Average CBA-CB M1's run time with pruning: %.2lf s" % (cba_cb_total_runtime / 10))
@@ -208,6 +243,7 @@ def cross_validate_m2_without_prune(data_path, scheme_path, minsup=0.01, minconf
     total_car_number = 0
     total_classifier_rule_num = 0
     error_total_rate = 0
+    total_accuracy = 0
 
     for k in range(len(split_point)-1):
         print("\nRound %d:" % k)
@@ -230,6 +266,9 @@ def cross_validate_m2_without_prune(data_path, scheme_path, minsup=0.01, minconf
         error_rate = get_error_rate(classifier_m2, test_dataset)
         error_total_rate += error_rate
 
+        predictor_accuracy = get_accuracy(classifier_m2,dataset)
+        total_accuracy += predictor_accuracy
+
         total_car_number += len(cars.rules)
         total_classifier_rule_num += len(classifier_m2.rule_list)
 
@@ -240,6 +279,7 @@ def cross_validate_m2_without_prune(data_path, scheme_path, minsup=0.01, minconf
         print("No. of rules in classifier of CBA-CB M2 without pruning: %d" % len(classifier_m2.rule_list))
 
     print("\nAverage CBA's error rate without pruning: %.1lf%%" % (error_total_rate / 10 * 100))
+    print("Average CBA's accuracy without pruning: %.1lf%%" % (total_accuracy/ 10 * 100))
     print("Average No. of CARs without pruning: %d" % int(total_car_number / 10))
     print("Average CBA-RG's run time without pruning: %.2lf s" % (cba_rg_total_runtime / 10))
     print("Average CBA-CB M2's run time without pruning: %.2lf s" % (cba_cb_total_runtime / 10))
@@ -261,6 +301,7 @@ def cross_validate_m2_with_prune(data_path, scheme_path, minsup=0.01, minconf=0.
     total_car_number = 0
     total_classifier_rule_num = 0
     error_total_rate = 0
+    total_accuracy = 0
 
     for k in range(len(split_point)-1):
         print("\nRound %d:" % k)
@@ -287,6 +328,9 @@ def cross_validate_m2_with_prune(data_path, scheme_path, minsup=0.01, minconf=0.
         error_rate = get_error_rate(classifier_m2, test_dataset)
         error_total_rate += error_rate
 
+        predictor_accuracy = get_accuracy(classifier_m2,dataset)
+        total_accuracy += predictor_accuracy
+
         total_car_number += len(cars.rules)
         total_classifier_rule_num += len(classifier_m2.rule_list)
 
@@ -297,6 +341,7 @@ def cross_validate_m2_with_prune(data_path, scheme_path, minsup=0.01, minconf=0.
         print("No. of rules in classifier of CBA-CB M2 with pruning: %d" % len(classifier_m2.rule_list))
 
     print("\nAverage CBA's error rate with pruning: %.1lf%%" % (error_total_rate / 10 * 100))
+    print("Average CBA's accuracy with pruning: %.1lf%%" % (total_accuracy/ 10 * 100))
     print("Average No. of CARs with pruning: %d" % int(total_car_number / 10))
     print("Average CBA-RG's run time with pruning: %.2lf s" % (cba_rg_total_runtime / 10))
     print("Average CBA-CB M2's run time with pruning: %.2lf s" % (cba_cb_total_runtime / 10))
