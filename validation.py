@@ -16,6 +16,7 @@ from cba_cb_m1 import is_satisfy
 from cba_cb_m2 import classifier_builder_m2
 import time
 import random
+from split_dataframe import define_splitting
 
 def get_accuracy(classifier,dataset):
     size = len(dataset)
@@ -86,9 +87,10 @@ def cross_validate_m1_without_prune(data_path, scheme_path, minsup=0.01, minconf
     random.shuffle(data)
     dataset = pre_process(data, attributes, value_type)
 
-    block_size = int(len(dataset) / 10)
-    split_point = [k * block_size for k in range(0, 10)]
-    split_point.append(len(dataset))
+    # block_size = int(len(dataset) / 10)
+    # split_point = [k * block_size for k in range(0, 10)]
+    # split_point.append(len(dataset))
+    split_point=define_splitting(dataset)
 
     cba_rg_total_runtime = 0
     cba_cb_total_runtime = 0
@@ -160,9 +162,10 @@ def cross_validate_m1_with_prune(data_path, scheme_path, minsup=0.01, minconf=0.
     random.shuffle(data)
     dataset = pre_process(data, attributes, value_type)
 
-    block_size = int(len(dataset) / 10)
-    split_point = [k * block_size for k in range(0, 10)]
-    split_point.append(len(dataset))
+    # block_size = int(len(dataset) / 10)
+    # split_point = [k * block_size for k in range(0, 10)]
+    # split_point.append(len(dataset))
+    split_point=define_splitting(dataset)
 
     cba_rg_total_runtime = 0
     cba_cb_total_runtime = 0
@@ -236,9 +239,10 @@ def cross_validate_m2_without_prune(data_path, scheme_path, minsup=0.01, minconf
     random.shuffle(data)
     dataset = pre_process(data, attributes, value_type)
 
-    block_size = int(len(dataset) / 10)
-    split_point = [k * block_size for k in range(0, 10)]
-    split_point.append(len(dataset))
+    # block_size = int(len(dataset) / 10)
+    # split_point = [k * block_size for k in range(0, 10)]
+    # split_point.append(len(dataset))
+    split_point=define_splitting(dataset)
 
     cba_rg_total_runtime = 0
     cba_cb_total_runtime = 0
@@ -294,9 +298,10 @@ def cross_validate_m2_with_prune(data_path, scheme_path, minsup=0.01, minconf=0.
     random.shuffle(data)
     dataset = pre_process(data, attributes, value_type)
 
-    block_size = int(len(dataset) / 10)
-    split_point = [k * block_size for k in range(0, 10)]
-    split_point.append(len(dataset))
+    # block_size = int(len(dataset) / 10)
+    # split_point = [k * block_size for k in range(0, 10)]
+    # split_point.append(len(dataset))
+    split_point=define_splitting(dataset)
 
     cba_rg_total_runtime = 0
     cba_cb_total_runtime = 0

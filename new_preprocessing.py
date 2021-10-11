@@ -62,7 +62,7 @@ def label_encode(df, schema):
     for i in range(len(schema[0])):
         colname = schema[0][i]
         coltype = schema[1][i]
-        if coltype == 'categorical' and not np.issubdtype(clean_df[colname].dtype, np.number):
+        if (coltype == 'categorical'or coltype=='label') and not np.issubdtype(clean_df[colname].dtype, np.number):
             clean_df[colname] = clean_df[colname].astype('category')
             clean_df[colname] = clean_df[colname].cat.codes
     return clean_df
@@ -74,6 +74,28 @@ def discretize(df, schema):
     """
     pass
 
+def create_dataframe(dataset_name):
+    pd.set_option('display.max_columns', None)  # ensures all columns are printed
+
+    # df, schema = read_dataset("horse-colic")  # lots of missing values, mixed bag but all numbers (even categorical)
+    # df, schema = read_dataset("facebook")  # a few missing values, mixed bag but all numbers (even categorical)
+    df, schema = read_dataset(dataset_name)  # all categorical non-numeric (x, o, and b)
+    # print(df.describe())
+    # print(df.info())
+    df, schema = clean_missing_values(df, schema)
+    # print(df.describe())
+    # print(df.info())
+    # print('\n')
+    # print(df.head())
+    # for i in range(len(schema[0])):
+    #     print(schema[0][i], schema[1][i], sep='\t')
+
+    df = label_encode(df, schema)
+    # print(df.describe())
+    # print(df.info())
+    # print('\n')
+    # print(df.head())
+    return df
 
 if __name__ == "__main__":  # for testing only
 
@@ -97,3 +119,4 @@ if __name__ == "__main__":  # for testing only
     print(df.info())
     print('\n')
     print(df.head())
+    
