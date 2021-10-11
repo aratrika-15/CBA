@@ -22,16 +22,35 @@ import random
 def get_error_rate(classifier, dataset):
     size = len(dataset)
     error_number = 0
+    # for case in dataset:
+    #     is_satisfy_value = False
+    #     for rule in classifier.rule_list:
+    #         is_satisfy_value = is_satisfy(case, rule)
+    #         if is_satisfy_value == True:
+    #             break
+    #     if is_satisfy_value == False:
+    #         if classifier.default_class != case[-1]:
+    #             error_number += 1
+    # return error_number / size
     for case in dataset:
-        is_satisfy_value = False
+        is_satisfy_value=False
         for rule in classifier.rule_list:
-            is_satisfy_value = is_satisfy(case, rule)
-            if is_satisfy_value == True:
+            is_satisfy_value=is_satisfy(case,rule)
+            flag=0
+            if is_satisfy_value==True:
+                flag=1
                 break
-        if is_satisfy_value == False:
+            if is_satisfy_value==False:
+                flag=1
+                error_number+=1
+                break
+        if flag==1:
+            continue
+        else:
             if classifier.default_class != case[-1]:
-                error_number += 1
-    return error_number / size
+                error_number+=1
+    return error_number/size
+
 
 
 # 10-fold cross-validations on CBA (M1) without pruning
@@ -290,7 +309,7 @@ if __name__ == "__main__":
     test_scheme_path = 'datasets/iris.names'
 
     # just choose one mode to experiment by removing one line comment and running
-    #cross_validate_m1_without_prune(test_data_path, test_scheme_path)
-    cross_validate_m1_with_prune(test_data_path, test_scheme_path)
+    cross_validate_m1_without_prune(test_data_path, test_scheme_path)
+    #cross_validate_m1_with_prune(test_data_path, test_scheme_path)
     #cross_validate_m2_without_prune(test_data_path, test_scheme_path)
-    # cross_validate_m1_with_prune(test_data_path, test_scheme_path)
+    #cross_validate_m2_with_prune(test_data_path, test_scheme_path)

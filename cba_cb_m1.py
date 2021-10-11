@@ -75,7 +75,7 @@ class Classifier:
         #     if not is_cover:
         #         error_number += 1
         self.rule_error_list.append(number_of_rule_errors)
-        print(self.rule_error_list)
+        #print(self.rule_error_list)
         error_number+=sum(self.rule_error_list)
 
         # the number of errors to be made by the default class in the training set
