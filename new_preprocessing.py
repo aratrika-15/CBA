@@ -1,6 +1,6 @@
 import pandas as pd
 import numpy as np
-import feature_engine
+from feature_engine.discretisation import DecisionTreeDiscretiser
 
 def read_dataset(name):
     """
@@ -72,8 +72,43 @@ def discretize(df, schema):
     """
     Uses a decision tree to discretize the dataset's numerical attributes. Gini index is used as the impurity metric.
     """
-    pass
 
+    toDiscretize = [schema[0][i] for i in range(len(schema[0])) if schema[1][i] == 'numerical']
+    label = schema[0][schema[1].index('label')]
+    print("Discretizing:", toDiscretize)
+    print('Using label:', label)
+    if len(toDiscretize) == 0:
+        return df
+    disc = DecisionTreeDiscretiser(scoring='accuracy',
+                                   variables=toDiscretize,
+                                   regression=False,
+                                   param_grid={'max_depth': [2,3,4], 'min_samples_leaf':[10,4,2], 'criterion':['gini']},
+                                   random_state=42069)
+    
+    disc.fit(df, df[label])
+    disc_df = disc.transform(df.copy())
+
+    # representing the discretized categories as label encodings in sorted order
+    for colname in toDiscretize:
+        # print(disc_df[colname].unique())
+        labelSet = set()
+        for i in range(len(disc_df)):
+            labelSet.add(disc_df[colname][i])
+        # print(labelSet)
+        encodingDict = {}
+        for i, lab in enumerate(sorted(list(labelSet))):
+            encodingDict[lab] = i
+        disc_df[colname] = disc_df[colname].map(encodingDict)
+
+    return disc_df
+
+
+def preprocess_to_array(inp_df, inp_schema):
+    df, schema = clean_missing_values(inp_df, inp_schema)
+    df = label_encode(df, schema)
+    df = discretize(df, schema)
+    final_array = df.values.tolist()
+    return final_array
 
 if __name__ == "__main__":  # for testing only
 
@@ -81,19 +116,32 @@ if __name__ == "__main__":  # for testing only
 
     # df, schema = read_dataset("horse-colic")  # lots of missing values, mixed bag but all numbers (even categorical)
     # df, schema = read_dataset("facebook")  # a few missing values, mixed bag but all numbers (even categorical)
-    df, schema = read_dataset("tic-tac-toe")  # all categorical non-numeric (x, o, and b)
+    # df, schema = read_dataset("tic-tac-toe")  # all categorical non-numeric (x, o, and b)
+    df, schema = read_dataset("iris")
     # print(df.describe())
     # print(df.info())
-    df, schema = clean_missing_values(df, schema)
-    print(df.describe())
-    print(df.info())
-    print('\n')
-    print(df.head())
-    for i in range(len(schema[0])):
-        print(schema[0][i], schema[1][i], sep='\t')
 
-    df = label_encode(df, schema)
-    print(df.describe())
-    print(df.info())
-    print('\n')
-    print(df.head())
+    # df, schema = clean_missing_values(df, schema)
+    # print(df.describe())
+    # print(df.info())
+    # print('\n')
+    # print(df.head())
+    # for i in range(len(schema[0])):
+    #     print(schema[0][i], schema[1][i], sep='\t')
+
+    # df = label_encode(df, schema)
+    # print(df.describe())
+    # print(df.info())
+    # print('\n')
+    # print(df.head())
+
+    # df = discretize(df, schema)
+    # print(df.describe())
+    # print(df.info())
+    # print('\n')
+    # print(df.head())
+
+    # final_array = df.values.tolist()
+
+    final_array = preprocess_to_array(df, schema)
+    print(final_array[:5])
