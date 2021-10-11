@@ -162,7 +162,12 @@ def sort_with_index(q, cars_list):
                 if len(cars_list[a].cond_set) < len(cars_list[b].cond_set):
                     return -1
                 elif len(cars_list[a].cond_set) == len(cars_list[b].cond_set):
-                    return 0
+                    for rules in cars_list:
+                        if (rules == cars_list[a]):
+                            return -1
+                        elif (rules == cars_list[b]):
+                            return 1
+                    # return 0
                 else:
                     return 1
             else:
