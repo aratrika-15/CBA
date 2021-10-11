@@ -37,6 +37,8 @@ def get_accuracy(classifier,dataset):
             if is_satisfy_value==True:
                 count = count+1
                 break
+            if is_satisfy_value==False:
+                break
         if is_satisfy_value==None:
             if(classifier.default_class==case[-1]):
                 count = count+1
@@ -132,7 +134,7 @@ def cross_validate_m1_without_prune(data_path, scheme_path, minsup=0.01, minconf
         error_rate = get_error_rate(classifier_m1, test_dataset)
         error_total_rate += error_rate
 
-        predictor_accuracy = get_accuracy(classifier_m1,dataset)
+        predictor_accuracy = get_accuracy(classifier_m1,test_dataset)
         total_accuracy += predictor_accuracy
 
         total_car_number += len(cars.rules)
@@ -208,7 +210,7 @@ def cross_validate_m1_with_prune(data_path, scheme_path, minsup=0.01, minconf=0.
         error_rate = get_error_rate(classifier_m1, test_dataset)
         error_total_rate += error_rate
 
-        predictor_accuracy = get_accuracy(classifier_m1,dataset)
+        predictor_accuracy = get_accuracy(classifier_m1,test_dataset)
         total_accuracy += predictor_accuracy
 
         total_car_number += len(cars.rules)
@@ -266,7 +268,7 @@ def cross_validate_m2_without_prune(data_path, scheme_path, minsup=0.01, minconf
         error_rate = get_error_rate(classifier_m2, test_dataset)
         error_total_rate += error_rate
 
-        predictor_accuracy = get_accuracy(classifier_m2,dataset)
+        predictor_accuracy = get_accuracy(classifier_m2,test_dataset)
         total_accuracy += predictor_accuracy
 
         total_car_number += len(cars.rules)
@@ -328,7 +330,7 @@ def cross_validate_m2_with_prune(data_path, scheme_path, minsup=0.01, minconf=0.
         error_rate = get_error_rate(classifier_m2, test_dataset)
         error_total_rate += error_rate
 
-        predictor_accuracy = get_accuracy(classifier_m2,dataset)
+        predictor_accuracy = get_accuracy(classifier_m2,test_dataset)
         total_accuracy += predictor_accuracy
 
         total_car_number += len(cars.rules)
