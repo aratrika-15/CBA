@@ -8,8 +8,8 @@ Input: the relative directory path of data file and scheme file
 Output: the experimental results (similar to Table 1: Experiment Results in this paper)
 Author: CBA Studio
 """
-from read import read
-from pre_processing import pre_process
+
+from new_preprocessing import preprocess_to_array,read_dataset
 from cba_rg import rule_generator
 from cba_cb_m1 import classifier_builder_m1
 from cba_cb_m1 import is_satisfy
@@ -82,10 +82,10 @@ def get_error_rate(classifier, dataset):
 
 
 # 10-fold cross-validations on CBA (M1) without pruning
-def cross_validate_m1_without_prune(data_path, scheme_path, minsup=0.01, minconf=0.5):
-    data, attributes, value_type = read(data_path, scheme_path)
-    random.shuffle(data)
-    dataset = pre_process(data, attributes, value_type)
+def cross_validate_m1_without_prune(dataset_name, minsup=0.01, minconf=0.5):
+    df, schema = read_dataset(dataset_name)
+    dataset = preprocess_to_array(df,schema)
+    random.shuffle(dataset)
 
     # block_size = int(len(dataset) / 10)
     # split_point = [k * block_size for k in range(0, 10)]
@@ -157,11 +157,10 @@ def cross_validate_m1_without_prune(data_path, scheme_path, minsup=0.01, minconf
 
 
 # 10-fold cross-validations on CBA (M1) with pruning
-def cross_validate_m1_with_prune(data_path, scheme_path, minsup=0.01, minconf=0.5):
-    data, attributes, value_type = read(data_path, scheme_path)
-    random.shuffle(data)
-    dataset = pre_process(data, attributes, value_type)
-
+def cross_validate_m1_with_prune(dataset_name, minsup=0.01, minconf=0.5):
+    df, schema = read_dataset(dataset_name)
+    dataset = preprocess_to_array(df,schema)
+    random.shuffle(dataset)
     # block_size = int(len(dataset) / 10)
     # split_point = [k * block_size for k in range(0, 10)]
     # split_point.append(len(dataset))
@@ -234,10 +233,10 @@ def cross_validate_m1_with_prune(data_path, scheme_path, minsup=0.01, minconf=0.
 
 
 # 10-fold cross-validations on CBA (M2) without pruning
-def cross_validate_m2_without_prune(data_path, scheme_path, minsup=0.01, minconf=0.5):
-    data, attributes, value_type = read(data_path, scheme_path)
-    random.shuffle(data)
-    dataset = pre_process(data, attributes, value_type)
+def cross_validate_m2_without_prune(dataset_name, minsup=0.01, minconf=0.5):
+    df, schema = read_dataset(dataset_name)
+    dataset = preprocess_to_array(df,schema)
+    random.shuffle(dataset)
 
     # block_size = int(len(dataset) / 10)
     # split_point = [k * block_size for k in range(0, 10)]
@@ -293,10 +292,10 @@ def cross_validate_m2_without_prune(data_path, scheme_path, minsup=0.01, minconf
 
 
 # 10-fold cross-validations on CBA (M2) with pruning
-def cross_validate_m2_with_prune(data_path, scheme_path, minsup=0.01, minconf=0.5):
-    data, attributes, value_type = read(data_path, scheme_path)
-    random.shuffle(data)
-    dataset = pre_process(data, attributes, value_type)
+def cross_validate_m2_with_prune(dataset_name, minsup=0.01, minconf=0.5):
+    df, schema = read_dataset(dataset_name)
+    dataset = preprocess_to_array(df,schema)
+    random.shuffle(dataset)
 
     # block_size = int(len(dataset) / 10)
     # split_point = [k * block_size for k in range(0, 10)]
@@ -358,11 +357,10 @@ def cross_validate_m2_with_prune(data_path, scheme_path, minsup=0.01, minconf=0.
 # test entry goes here
 if __name__ == "__main__":
     # using the relative path, all data sets are stored in datasets directory
-    test_data_path = 'datasets/iris.data'
-    test_scheme_path = 'datasets/iris.names'
+    dataset='iris'
 
     # just choose one mode to experiment by removing one line comment and running
-    #cross_validate_m1_without_prune(test_data_path, test_scheme_path)
-    cross_validate_m1_with_prune(test_data_path, test_scheme_path)
-    #cross_validate_m2_without_prune(test_data_path, test_scheme_path)
-    #cross_validate_m2_with_prune(test_data_path, test_scheme_path)
+    #cross_validate_m1_without_prune(dataset)
+    #cross_validate_m1_with_prune(dataset)
+    #cross_validate_m2_without_prune(dataset)
+    cross_validate_m2_with_prune(dataset)
