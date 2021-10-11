@@ -36,12 +36,13 @@ class Classifier:
         self.default_class = None #equivalent to the default class in the pseudocode
         self._error_list = list()
         self._default_class_list = list() #maintains a list of default classes, that gets appended to after each rule r is added to C
+        self.rule_error_list=list()
 
     # insert a rule into rule_list, then choose a default class, and calculate the errors (see line 8, 10 & 11)
-    def insert(self, rule, dataset):
+    def insert(self, rule, dataset,number_of_rule_errors):
         self.rule_list.append(rule)             # insert r at the end of C
         self._select_default_class(dataset)     # select a default class for the current C
-        self._compute_error(dataset)            # compute the total number of errors of C
+        self._compute_error(dataset, number_of_rule_errors)            # compute the total number of errors of C
 
     # select the majority class in the remaining data
     def _select_default_class(self, dataset):
@@ -57,7 +58,7 @@ class Classifier:
         self._default_class_list.append(current_default_class)
 
     # compute the sum of errors
-    def _compute_error(self, dataset):
+    def _compute_error(self, dataset, number_of_rule_errors):
         if len(dataset) <= 0:
             self._error_list.append(sys.maxsize)
             return
@@ -65,14 +66,17 @@ class Classifier:
         error_number = 0
 
         # the number of errors that have been made by all the selected rules in C
-        for case in dataset:
-            is_cover = False
-            for rule in self.rule_list:
-                if is_satisfy(case, rule):
-                    is_cover = True
-                    break
-            if not is_cover:
-                error_number += 1
+        # for case in dataset:
+        #     is_cover = False
+        #     for rule in self.rule_list:
+        #         if is_satisfy(case, rule):
+        #             is_cover = True
+        #             break
+        #     if not is_cover:
+        #         error_number += 1
+        self.rule_error_list.append(number_of_rule_errors)
+        print(self.rule_error_list)
+        error_number+=sum(self.rule_error_list)
 
         # the number of errors to be made by the default class in the training set
         class_column = [x[-1] for x in dataset]
@@ -110,11 +114,16 @@ def sort(car):
                     return -1
                 elif len(a.cond_set) == len(b.cond_set):
                     #how to figure out precedence if the two cond_sets are of the same length!!!!!!!!!!!!!!
+                   
                     for rule in car.rule_list:
                         if rule==a:
+                            
                             return -1
                         if rule==b:
+                            
                             return 1
+
+                    return 0
 
                 else:
                     return 1
@@ -142,12 +151,14 @@ def classifier_builder_m1(cars, dataset):
     for rule in cars_list:
         temp = []
         mark = False
+        temp_satisfies_consequent=0
         for i in range(len(dataset)):
             is_satisfy_value = is_satisfy(dataset[i], rule)
             if is_satisfy_value is not None:
                 temp.append(i)
                 if is_satisfy_value:
                     mark = True
+                    temp_satisfies_consequent+=1
         
         if mark:
             temp_dataset = list(dataset)
@@ -156,7 +167,8 @@ def classifier_builder_m1(cars, dataset):
             while [] in temp_dataset:
                 temp_dataset.remove([])
             dataset = temp_dataset
-            classifier.insert(rule, dataset)
+            number_of_rule_errors=len(temp)-temp_satisfies_consequent
+            classifier.insert(rule, dataset, number_of_rule_errors)
         
     classifier.discard()
     return classifier

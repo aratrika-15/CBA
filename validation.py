@@ -58,6 +58,22 @@ def cross_validate_m1_without_prune(data_path, scheme_path, minsup=0.01, minconf
 
         start_time = time.time()
         cars = rule_generator(training_dataset, minsup, minconf)
+
+        print("CARs:(set)")
+        #cars.print_rule()
+        print("len:")
+        print(len(cars.rules))
+        print("Rule_list")
+        #cars.print_rule_list()
+        print("len:")
+        print(len(cars.rule_list))
+        for i in cars.rules:
+            if i in cars.rule_list:
+                # print("Hello")
+                continue
+            else:
+                print("World")
+
         end_time = time.time()
         cba_rg_runtime = end_time - start_time
         cba_rg_total_runtime += cba_rg_runtime
@@ -111,6 +127,21 @@ def cross_validate_m1_with_prune(data_path, scheme_path, minsup=0.01, minconf=0.
 
         start_time = time.time()
         cars = rule_generator(training_dataset, minsup, minconf)
+        print("CARs:(set)")
+        #cars.print_rule()
+        print("len:")
+        print(len(cars.rules))
+        print("Rule_list")
+        #cars.print_rule_list()
+        print("len:")
+        print(len(cars.rule_list))
+        for i in cars.rules:
+            if i in cars.rule_list:
+                # print("Hello")
+                continue
+            else:
+                print("World")
+
         cars.prune_rules(training_dataset)
         cars.rules = cars.pruned_rules
         end_time = time.time()
@@ -219,6 +250,8 @@ def cross_validate_m2_with_prune(data_path, scheme_path, minsup=0.01, minconf=0.
 
         start_time = time.time()
         cars = rule_generator(training_dataset, minsup, minconf)
+
+
         cars.prune_rules(training_dataset)
         cars.rules = cars.pruned_rules
         end_time = time.time()
@@ -259,5 +292,5 @@ if __name__ == "__main__":
     # just choose one mode to experiment by removing one line comment and running
     #cross_validate_m1_without_prune(test_data_path, test_scheme_path)
     cross_validate_m1_with_prune(test_data_path, test_scheme_path)
-    # cross_validate_m2_without_prune(test_data_path, test_scheme_path)
+    #cross_validate_m2_without_prune(test_data_path, test_scheme_path)
     # cross_validate_m1_with_prune(test_data_path, test_scheme_path)
