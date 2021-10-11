@@ -142,25 +142,26 @@ def cross_validate_m1_with_prune(data_path, scheme_path, minsup=0.01, minconf=0.
         print("\nRound %d:" % k)
 
         training_dataset = dataset[:split_point[k]] + dataset[split_point[k+1]:]
+        print("Length of training dataset: ",len(training_dataset))
         test_dataset = dataset[split_point[k]:split_point[k+1]]
-
+        print("Length of testing dataset: ",len(test_dataset))
         start_time = time.time()
         cars = rule_generator(training_dataset, minsup, minconf)
-        print("CARs:(set)")
-        #cars.print_rule()
-        print("len:")
-        print(len(cars.rules))
-        print("Rule_list")
-        #cars.print_rule_list()
-        print("len:")
-        print(len(cars.rule_list))
-        for i in cars.rules:
-            if i in cars.rule_list:
-                # print("Hello")
-                continue
-            else:
-                print("World")
-
+        # print("CARs:(set)")
+        # #cars.print_rule()
+        # print("len:")
+        # print(len(cars.rules))
+        # print("Rule_list")
+        # #cars.print_rule_list()
+        # print("len:")
+        # print(len(cars.rule_list))
+        # for i in cars.rules:
+        #     if i in cars.rule_list:
+        #         # print("Hello")
+        #         continue
+        #     else:
+        #         print("World")
+        print("Number of rules without pruning: ",len(cars.rules))
         cars.prune_rules(training_dataset)
         cars.rules = cars.pruned_rules
         end_time = time.time()
@@ -309,7 +310,7 @@ if __name__ == "__main__":
     test_scheme_path = 'datasets/iris.names'
 
     # just choose one mode to experiment by removing one line comment and running
-    cross_validate_m1_without_prune(test_data_path, test_scheme_path)
-    #cross_validate_m1_with_prune(test_data_path, test_scheme_path)
+    #cross_validate_m1_without_prune(test_data_path, test_scheme_path)
+    cross_validate_m1_with_prune(test_data_path, test_scheme_path)
     #cross_validate_m2_without_prune(test_data_path, test_scheme_path)
     #cross_validate_m2_with_prune(test_data_path, test_scheme_path)
