@@ -1,0 +1,7 @@
+Discretizing: ['Paid', 'Lifetime Post Total Reach', 'Lifetime Post Total Impressions', 'Lifetime Engaged Users', 'Lifetime Post Consumers', 'Lifetime Post Consumptions', 'Lifetime Post Impressions by people who have liked your Page', 'Lifetime Post reach by people who like your Page', 'Lifetime People who have liked your Page and engaged with your post', 'comment', 'like', 'share', 'Total Interactions']
+Using label: class
+
+Round 0:
+Length of training dataset:  450
+Length of testing dataset:  50
+Number of rules without pruning:  1583

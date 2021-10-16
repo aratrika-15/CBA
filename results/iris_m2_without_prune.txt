@@ -1,0 +1,89 @@
+Discretizing: ['sepal length', 'sepal width', 'petal length', 'petal width']
+Using label: class
+
+Round 0:
+value of count: 14
+CBA's error rate without pruning: 6.7%
+No. of CARs without pruning: 197
+CBA-RG's run time without pruning: 0.06 s
+CBA-CB M2's run time without pruning: 0.01 s
+No. of rules in classifier of CBA-CB M2 without pruning: 11
+
+Round 1:
+value of count: 14
+CBA's error rate without pruning: 6.7%
+No. of CARs without pruning: 194
+CBA-RG's run time without pruning: 0.05 s
+CBA-CB M2's run time without pruning: 0.01 s
+No. of rules in classifier of CBA-CB M2 without pruning: 8
+
+Round 2:
+value of count: 15
+CBA's error rate without pruning: 0.0%
+No. of CARs without pruning: 204
+CBA-RG's run time without pruning: 0.06 s
+CBA-CB M2's run time without pruning: 0.01 s
+No. of rules in classifier of CBA-CB M2 without pruning: 12
+
+Round 3:
+value of count: 15
+CBA's error rate without pruning: 0.0%
+No. of CARs without pruning: 210
+CBA-RG's run time without pruning: 0.06 s
+CBA-CB M2's run time without pruning: 0.01 s
+No. of rules in classifier of CBA-CB M2 without pruning: 12
+
+Round 4:
+value of count: 15
+CBA's error rate without pruning: 0.0%
+No. of CARs without pruning: 204
+CBA-RG's run time without pruning: 0.06 s
+CBA-CB M2's run time without pruning: 0.01 s
+No. of rules in classifier of CBA-CB M2 without pruning: 12
+
+Round 5:
+value of count: 14
+CBA's error rate without pruning: 6.7%
+No. of CARs without pruning: 205
+CBA-RG's run time without pruning: 0.06 s
+CBA-CB M2's run time without pruning: 0.01 s
+No. of rules in classifier of CBA-CB M2 without pruning: 10
+
+Round 6:
+value of count: 14
+CBA's error rate without pruning: 6.7%
+No. of CARs without pruning: 205
+CBA-RG's run time without pruning: 0.06 s
+CBA-CB M2's run time without pruning: 0.01 s
+No. of rules in classifier of CBA-CB M2 without pruning: 9
+
+Round 7:
+value of count: 13
+CBA's error rate without pruning: 13.3%
+No. of CARs without pruning: 203
+CBA-RG's run time without pruning: 0.06 s
+CBA-CB M2's run time without pruning: 0.01 s
+No. of rules in classifier of CBA-CB M2 without pruning: 6
+
+Round 8:
+value of count: 15
+CBA's error rate without pruning: 0.0%
+No. of CARs without pruning: 203
+CBA-RG's run time without pruning: 0.06 s
+CBA-CB M2's run time without pruning: 0.01 s
+No. of rules in classifier of CBA-CB M2 without pruning: 10
+
+Round 9:
+value of count: 15
+CBA's error rate without pruning: 0.0%
+No. of CARs without pruning: 207
+CBA-RG's run time without pruning: 0.07 s
+CBA-CB M2's run time without pruning: 0.01 s
+No. of rules in classifier of CBA-CB M2 without pruning: 12
+
+Average CBA's error rate without pruning: 4.0%
+Average CBA's accuracy without pruning: 96.0%
+Average No. of CARs without pruning: 203
+Average CBA-RG's run time without pruning: 0.06 s
+Average CBA-CB M2's run time without pruning: 0.01 s
+Average No. of rules in classifier of CBA-CB M2 without pruning: 10
