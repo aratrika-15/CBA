@@ -1,0 +1,149 @@
+Discretizing: ['Paid', 'Lifetime Post Total Reach', 'Lifetime Post Total Impressions', 'Lifetime Engaged Users', 'Lifetime Post Consumers', 'Lifetime Post Consumptions', 'Lifetime Post Impressions by people who have liked your Page', 'Lifetime Post reach by people who like your Page', 'Lifetime People who have liked your Page and engaged with your post', 'comment', 'like', 'share', 'Total Interactions']
+Using label: class
+
+Round 0:
+CARs:(set)
+len:
+1396
+Rule_list
+len:
+1396
+value of count: 45
+CBA's error rate without pruning: 10.0%
+No. of CARs without pruning: 1396
+CBA-RG's run time without pruning: 8.75 s
+CBA-CB M1's run time without pruning: 0.08 s
+No. of rules in classifier of CBA-CB M1 without pruning: 47
+
+Round 1:
+CARs:(set)
+len:
+2034
+Rule_list
+len:
+2034
+value of count: 41
+CBA's error rate without pruning: 18.0%
+No. of CARs without pruning: 2034
+CBA-RG's run time without pruning: 1.40 s
+CBA-CB M1's run time without pruning: 0.18 s
+No. of rules in classifier of CBA-CB M1 without pruning: 57
+
+Round 2:
+CARs:(set)
+len:
+1972
+Rule_list
+len:
+1972
+value of count: 42
+CBA's error rate without pruning: 16.0%
+No. of CARs without pruning: 1972
+CBA-RG's run time without pruning: 11.31 s
+CBA-CB M1's run time without pruning: 0.10 s
+No. of rules in classifier of CBA-CB M1 without pruning: 58
+
+Round 3:
+CARs:(set)
+len:
+1702
+Rule_list
+len:
+1702
+value of count: 42
+CBA's error rate without pruning: 16.0%
+No. of CARs without pruning: 1702
+CBA-RG's run time without pruning: 44.79 s
+CBA-CB M1's run time without pruning: 0.20 s
+No. of rules in classifier of CBA-CB M1 without pruning: 62
+
+Round 4:
+CARs:(set)
+len:
+1012
+Rule_list
+len:
+1012
+value of count: 49
+CBA's error rate without pruning: 2.0%
+No. of CARs without pruning: 1012
+CBA-RG's run time without pruning: 3.84 s
+CBA-CB M1's run time without pruning: 0.05 s
+No. of rules in classifier of CBA-CB M1 without pruning: 57
+
+Round 5:
+CARs:(set)
+len:
+1688
+Rule_list
+len:
+1688
+value of count: 48
+CBA's error rate without pruning: 4.0%
+No. of CARs without pruning: 1688
+CBA-RG's run time without pruning: 37.75 s
+CBA-CB M1's run time without pruning: 0.16 s
+No. of rules in classifier of CBA-CB M1 without pruning: 49
+
+Round 6:
+CARs:(set)
+len:
+1601
+Rule_list
+len:
+1601
+value of count: 45
+CBA's error rate without pruning: 10.0%
+No. of CARs without pruning: 1601
+CBA-RG's run time without pruning: 23.78 s
+CBA-CB M1's run time without pruning: 0.14 s
+No. of rules in classifier of CBA-CB M1 without pruning: 62
+
+Round 7:
+CARs:(set)
+len:
+1770
+Rule_list
+len:
+1770
+value of count: 44
+CBA's error rate without pruning: 12.0%
+No. of CARs without pruning: 1770
+CBA-RG's run time without pruning: 7.90 s
+CBA-CB M1's run time without pruning: 0.16 s
+No. of rules in classifier of CBA-CB M1 without pruning: 58
+
+Round 8:
+CARs:(set)
+len:
+1540
+Rule_list
+len:
+1540
+value of count: 45
+CBA's error rate without pruning: 10.0%
+No. of CARs without pruning: 1540
+CBA-RG's run time without pruning: 18.05 s
+CBA-CB M1's run time without pruning: 0.12 s
+No. of rules in classifier of CBA-CB M1 without pruning: 54
+
+Round 9:
+CARs:(set)
+len:
+823
+Rule_list
+len:
+823
+value of count: 44
+CBA's error rate without pruning: 12.0%
+No. of CARs without pruning: 823
+CBA-RG's run time without pruning: 2.20 s
+CBA-CB M1's run time without pruning: 0.02 s
+No. of rules in classifier of CBA-CB M1 without pruning: 66
+
+Average CBA's error rate without pruning: 11.0%
+Average CBA's accuracy without pruning: 89.0%
+Average No. of CARs without pruning: 1553
+Average CBA-RG's run time without pruning: 15.98 s
+Average CBA-CB M1's run time without pruning: 0.12 s
+Average No. of rules in classifier of CBA-CB M1 without pruning: 57

@@ -1,0 +1,119 @@
+Discretizing: ['sepal length', 'sepal width', 'petal length', 'petal width']
+Using label: class
+
+Round 0:
+Length of training dataset:  135
+Length of testing dataset:  15
+Number of rules without pruning:  200
+value of count: 15
+CBA's error rate with pruning: 0.0%
+No. of CARs with pruning: 74
+CBA-RG's run time with pruning: 0.14 s
+CBA-CB M1's run time with pruning: 0.00 s
+No. of rules in classifier of CBA-CB M1 with pruning: 13
+
+Round 1:
+Length of training dataset:  135
+Length of testing dataset:  15
+Number of rules without pruning:  201
+value of count: 13
+CBA's error rate with pruning: 13.3%
+No. of CARs with pruning: 68
+CBA-RG's run time with pruning: 0.14 s
+CBA-CB M1's run time with pruning: 0.00 s
+No. of rules in classifier of CBA-CB M1 with pruning: 12
+
+Round 2:
+Length of training dataset:  135
+Length of testing dataset:  15
+Number of rules without pruning:  211
+value of count: 14
+CBA's error rate with pruning: 6.7%
+No. of CARs with pruning: 76
+CBA-RG's run time with pruning: 0.15 s
+CBA-CB M1's run time with pruning: 0.00 s
+No. of rules in classifier of CBA-CB M1 with pruning: 14
+
+Round 3:
+Length of training dataset:  135
+Length of testing dataset:  15
+Number of rules without pruning:  198
+value of count: 15
+CBA's error rate with pruning: 0.0%
+No. of CARs with pruning: 74
+CBA-RG's run time with pruning: 0.14 s
+CBA-CB M1's run time with pruning: 0.00 s
+No. of rules in classifier of CBA-CB M1 with pruning: 12
+
+Round 4:
+Length of training dataset:  135
+Length of testing dataset:  15
+Number of rules without pruning:  210
+value of count: 14
+CBA's error rate with pruning: 6.7%
+No. of CARs with pruning: 77
+CBA-RG's run time with pruning: 0.15 s
+CBA-CB M1's run time with pruning: 0.00 s
+No. of rules in classifier of CBA-CB M1 with pruning: 10
+
+Round 5:
+Length of training dataset:  135
+Length of testing dataset:  15
+Number of rules without pruning:  208
+value of count: 12
+CBA's error rate with pruning: 20.0%
+No. of CARs with pruning: 77
+CBA-RG's run time with pruning: 0.16 s
+CBA-CB M1's run time with pruning: 0.00 s
+No. of rules in classifier of CBA-CB M1 with pruning: 10
+
+Round 6:
+Length of training dataset:  135
+Length of testing dataset:  15
+Number of rules without pruning:  196
+value of count: 14
+CBA's error rate with pruning: 6.7%
+No. of CARs with pruning: 67
+CBA-RG's run time with pruning: 0.16 s
+CBA-CB M1's run time with pruning: 0.00 s
+No. of rules in classifier of CBA-CB M1 with pruning: 7
+
+Round 7:
+Length of training dataset:  135
+Length of testing dataset:  15
+Number of rules without pruning:  193
+value of count: 15
+CBA's error rate with pruning: 0.0%
+No. of CARs with pruning: 72
+CBA-RG's run time with pruning: 0.13 s
+CBA-CB M1's run time with pruning: 0.00 s
+No. of rules in classifier of CBA-CB M1 with pruning: 12
+
+Round 8:
+Length of training dataset:  135
+Length of testing dataset:  15
+Number of rules without pruning:  208
+value of count: 14
+CBA's error rate with pruning: 6.7%
+No. of CARs with pruning: 77
+CBA-RG's run time with pruning: 0.15 s
+CBA-CB M1's run time with pruning: 0.00 s
+No. of rules in classifier of CBA-CB M1 with pruning: 10
+
+Round 9:
+Length of training dataset:  135
+Length of testing dataset:  15
+Number of rules without pruning:  201
+value of count: 14
+CBA's error rate with pruning: 6.7%
+No. of CARs with pruning: 75
+CBA-RG's run time with pruning: 0.14 s
+CBA-CB M1's run time with pruning: 0.00 s
+No. of rules in classifier of CBA-CB M1 with pruning: 12
+
+Average CBA's error rate with pruning: 6.7%
+Average CBA's accuracy with pruning: 93.3%
+Average No. of CARs with pruning: 73
+Average CBA-RG's run time with pruning: 0.15 s
+Average CBA-CB M1's run time with pruning: 0.00 s
+Average No. of rules in classifier of CBA-CB M1 with pruning: 11
