@@ -1,12 +1,4 @@
-def antecedants_matched(datacase, rule):
-    """
-    Checks if all of a rule's antecedants are present in a datacase
-    """
-    for item in rule.cond_set:
-        if datacase[item] != rule.cond_set[item]:
-            return False
-    return True
-
+from cmar_rule import *
 
 def sort_rules(ruleList):
     """
@@ -38,7 +30,7 @@ def prune_with_cover(dataset, ruleList, minCover=3):
         coverFlag = False
         for index in coverCount:
             datacase = dataset[index]
-            if antecedants_matched(datacase, rule):
+            if rule.antecedants_matched(datacase):
                 coverCount[index] += 1
                 coverFlag = True
                 if coverCount[index] >= minCover and index not in removeSet:
