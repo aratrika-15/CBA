@@ -357,7 +357,8 @@ def cross_validate_m2_with_prune(dataset_name, minsup=0.01, minconf=0.5):
 # test entry goes here
 if __name__ == "__main__":
     # using the relative path, all data sets are stored in datasets directory
-    dataset='iris'
+    # dataset='iris'
+    dataset = 'seeds'
 
     # just choose one mode to experiment by removing one line comment and running
     #cross_validate_m1_without_prune(dataset)

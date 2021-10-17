@@ -3,7 +3,10 @@ class CMAR_Rule:
         self.cond_set = cond_set
         self.class_label = label
         self.sup_a, self.sup_c, self.support = self.calculate_supports(dataset)
-        self.confidence = self.support/self.sup_a
+        if self.sup_a != 0:
+            self.confidence = self.support/self.sup_a
+        else:
+            self.confidence = 0
 
         # required for chi square statistic
         self.n = len(dataset)  # number of values trained on
@@ -39,6 +42,9 @@ class CMAR_Rule:
         """
         Calculates maximum chi squared (MCS) value for the rule
         """
+        if self.support == 0:
+            return 0
+
         e = 1/(self.sup_a*self.sup_c) + 1/(self.sup_a*(self.n-self.sup_c)) + 1/((self.n-self.sup_a)*self.sup_c) + 1/((self.n-self.sup_a)*(self.n-self.sup_c))
         mcs = (min(self.sup_a, self.sup_c) - self.sup_a * self.sup_c / self.n)**2 * self.n * e
         return mcs
@@ -65,5 +71,25 @@ class CMAR_Rule:
         chi = 0
         obsVals, expVals = self.calculate_obs_and_exp()
         for i in range(4):
-            chi += (obsVals[i] - expVals[i])**2 / expVals[i]
+            if expVals[i] != 0:
+                chi += (obsVals[i] - expVals[i])**2 / expVals[i]
         return chi
+
+
+    # DELETE/REWRITE BELOW FUNCTIONS LATER
+    # print out the ruleitem
+    def print(self):
+        cond_set_output = ''
+        for item in self.cond_set:
+            cond_set_output += '(' + str(item) + ', ' + str(self.cond_set[item]) + '), '
+        cond_set_output = cond_set_output[:-2]
+        print('<({' + cond_set_output + '}, ' + str(self.cond_sup_count) + '), (' +
+              '(class, ' + str(self.class_label) + '), ' + str(self.rule_sup_count) + ')>')
+
+    # print out rule
+    def print_rule(self):
+        cond_set_output = ''
+        for item in self.cond_set:
+            cond_set_output += '(' + str(item) + ', ' + str(self.cond_set[item]) + '), '
+        cond_set_output = '{' + cond_set_output[:-2] + '}'
+        print(cond_set_output + ' -> (class, ' + str(self.class_label) + ')')
