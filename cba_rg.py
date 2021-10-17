@@ -225,6 +225,32 @@ def rule_generator(dataset, minsup, minconf):
 
     return cars
 
+def topKRules(k,minconf,cars):
+
+    top_k_rules = []
+    # R_list = []
+    internal_min_sup = 0
+    # tidsi = []
+    # tidsj = []
+    # tidsi_list = []
+    # tidsj_list = []
+
+    for rules in cars.rules:
+        if(rules.support>=internal_min_sup):
+            if(rules.confidence>=minconf):
+                top_k_rules.append(rules)
+                while(len(top_k_rules)>k):
+                    for s in top_k_rules:
+                        if(s.support == internal_min_sup):
+                            s.print_rule()
+                            top_k_rules.remove(s)
+                minimum = 999999999999
+                for s in top_k_rules:
+                    if(s.support<minimum):
+                        minimum = s.support
+                internal_min_sup = minimum
+    return top_k_rules
+
 
 # just for test
 if __name__ == "__main__":
@@ -250,3 +276,9 @@ if __name__ == "__main__":
     print("prCARs:")
     cars.prune_rules(dataset)
     cars.print_pruned_rule()
+    # top_k_rules = topKRules(int(len(cars.rule_list)*0.75),0.5,cars)
+    print("Top k")
+    top_k_rules = topKRules(4,0.5,cars)
+    print("final rules")
+    for i in top_k_rules:
+        i.print_rule()

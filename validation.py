@@ -11,6 +11,7 @@ Author: CBA Studio
 
 from new_preprocessing import preprocess_to_array,read_dataset
 from cba_rg import rule_generator
+from cba_rg import topKRules
 from cba_cb_m1 import classifier_builder_m1
 from cba_cb_m1 import is_satisfy
 from cba_cb_m2 import classifier_builder_m2
@@ -319,8 +320,11 @@ def cross_validate_m2_with_prune(dataset_name, minsup=0.01, minconf=0.5):
         cars = rule_generator(training_dataset, minsup, minconf)
 
 
-        cars.prune_rules(training_dataset)
-        cars.rules = cars.pruned_rules
+        # cars.prune_rules(training_dataset)
+        
+
+        # cars.rules = cars.pruned_rules
+        cars.rules=topKRules(int(len(cars.rule_list)*0.85),0.5,cars)
         end_time = time.time()
         cba_rg_runtime = end_time - start_time
         cba_rg_total_runtime += cba_rg_runtime
